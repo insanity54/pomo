@@ -26,9 +26,9 @@ ModeDisplay {
 
 class TimerState:
     
-    WORK = "Work"
-    SHORT_BREAK = "Short Break"
-    LONG_BREAK = "Long Break"
+    WORK = "[lime]Work[/lime]"
+    SHORT_BREAK = "[yellow]Short Break[/yellow]"
+    LONG_BREAK = "[cyan]Long Break[/cyan]"
 
 
 DURATIONS = {
@@ -51,8 +51,8 @@ class ModeDisplay(Static):
 
     def render(self):
         return (
-            f"[bold green]Current:[/bold green] {self.mode}\n"
-            f"[bold orange]Next:[/bold orange] {self.next_mode}"
+            f"[bold]Current:[/bold] {self.mode}\n"
+            f"[bold]Next:[/bold] {self.next_mode}"
         )
 
 
