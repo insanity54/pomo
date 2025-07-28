@@ -1,5 +1,3 @@
-# pomo.py
-
 from textual.app import App, ComposeResult
 from textual.containers import Container
 from textual.widgets import Header, Footer, Static, Digits
@@ -7,8 +5,6 @@ from textual.reactive import reactive
 
 
 CSS = """
-
-
 TimerDisplay {
     color: magenta;
     text-align: center;
@@ -16,17 +12,15 @@ TimerDisplay {
     height: 33%;
 }
 
-
 TimerDisplay.-alert {
     background: red;
     color: white;
 }
 
-
 ModeDisplay {
     text-align: center;
-    padding: 1;
-    height: 3;
+    padding: 2;
+    height: 10;
 }
 """
 
@@ -53,9 +47,13 @@ class TimerDisplay(Digits):
 
 class ModeDisplay(Static):
     mode = reactive(TimerState.POMODORO)
+    next_mode = reactive(TimerState.SHORT_BREAK)
 
     def render(self):
-        return f"[bold green]Current:[/bold green] {self.mode}"
+        return (
+            f"[bold green]Current:[/bold green] {self.mode}\n"
+            f"[bold orange]Next:[/bold orange] {self.next_mode}"
+        )
 
 
 class Pomo(App):
@@ -77,7 +75,6 @@ class Pomo(App):
     timer_task = None
 
     def compose(self) -> ComposeResult:
-        # yield Header()
         with Container():
             self.timer_display = TimerDisplay()
             self.mode_display = ModeDisplay()
@@ -85,18 +82,15 @@ class Pomo(App):
             yield self.mode_display
         yield Footer()
 
-
-
     def on_mount(self):
         self.update_display()
-        # self.query_one("HeaderIcon").visible = False
-
 
     def update_display(self):
         minutes = self.seconds_left // 60
         seconds = self.seconds_left % 60
         self.timer_display.time_left = f"{minutes:02}:{seconds:02}"
         self.mode_display.mode = self.current_mode
+        self.mode_display.next_mode = self.next_mode
 
     def start_timer(self, mode: str):
         if self.timer_task:
@@ -104,7 +98,6 @@ class Pomo(App):
         self.current_mode = mode
         self.seconds_left = DURATIONS[mode]
         self.timer_task = self.set_interval(1.0, self.tick)
-        self.update_display()
         self.timer_display.remove_class("-alert")
 
         # Update next_mode based on what we just started
@@ -116,6 +109,8 @@ class Pomo(App):
                 self.next_mode = TimerState.SHORT_BREAK
         else:
             self.next_mode = TimerState.POMODORO
+
+        self.update_display()
 
     def tick(self):
         if self.seconds_left > 0:
@@ -130,9 +125,6 @@ class Pomo(App):
         self.start_timer(TimerState.POMODORO)
 
     def action_start_short_break(self):
-        self.start_timer(TimerState.SHORT_BREAK)
-
-    def action_start_test(self):
         self.start_timer(TimerState.SHORT_BREAK)
 
     def action_start_long_break(self):
