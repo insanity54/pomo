@@ -65,12 +65,12 @@ class Pomo(App):
         ("2", "start_short_break", "5m"),
         ("3", "start_long_break", "15m"),
         ("space", "start_next", "Next"),
-        ("q", "quit", "Quit"),
+        ("q", "app.quit", "Quit"),
     ]
 
     seconds_left = reactive(0)
-    current_mode = reactive(TimerState.WAITING)
-    next_mode = reactive(TimerState.POMODORO)
+    current_mode = reactive(TimerState.POMODORO)
+    next_mode = reactive(TimerState.SHORT_BREAK)
     completed_pomodoros = reactive(0)
     timer_task = None
 
@@ -83,6 +83,7 @@ class Pomo(App):
         yield Footer()
 
     def on_mount(self):
+        self.start_timer(TimerState.POMODORO)
         self.update_display()
 
     def update_display(self):
