@@ -39,7 +39,7 @@ class TimerState:
 
 DURATIONS = {
     TimerState.POMODORO: 25 * 60,
-    TimerState.SHORT_BREAK: 2,
+    TimerState.SHORT_BREAK: 5 * 60,
     TimerState.LONG_BREAK: 15 * 60,
 }
 
