@@ -25,14 +25,14 @@ ModeDisplay {
 """
 
 class TimerState:
-    WAITING = "Waiting for user input"
-    POMODORO = "Pomodoro"
+    
+    WORK = "Work"
     SHORT_BREAK = "Short Break"
     LONG_BREAK = "Long Break"
 
 
 DURATIONS = {
-    TimerState.POMODORO: 25 * 60,
+    TimerState.WORK: 25 * 60,
     TimerState.SHORT_BREAK: 5 * 60,
     TimerState.LONG_BREAK: 15 * 60,
 }
@@ -46,7 +46,7 @@ class TimerDisplay(Digits):
 
 
 class ModeDisplay(Static):
-    mode = reactive(TimerState.POMODORO)
+    mode = reactive(TimerState.WORK)
     next_mode = reactive(TimerState.SHORT_BREAK)
 
     def render(self):
@@ -61,7 +61,7 @@ class Pomo(App):
     ENABLE_COMMAND_PALETTE = False
 
     BINDINGS = [
-        ("1", "start_pomodoro", "25m"),
+        ("1", "start_work", "25m"),
         ("2", "start_short_break", "5m"),
         ("3", "start_long_break", "15m"),
         ("space", "start_next", "Next"),
@@ -69,7 +69,7 @@ class Pomo(App):
     ]
 
     seconds_left = reactive(0)
-    current_mode = reactive(TimerState.POMODORO)
+    current_mode = reactive(TimerState.WORK)
     next_mode = reactive(TimerState.SHORT_BREAK)
     completed_pomodoros = reactive(0)
     timer_task = None
@@ -83,7 +83,7 @@ class Pomo(App):
         yield Footer()
 
     def on_mount(self):
-        self.start_timer(TimerState.POMODORO)
+        self.start_timer(TimerState.WORK)
         self.update_display()
 
     def update_display(self):
@@ -102,14 +102,14 @@ class Pomo(App):
         self.timer_display.remove_class("-alert")
 
         # Update next_mode based on what we just started
-        if mode == TimerState.POMODORO:
+        if mode == TimerState.WORK:
             self.completed_pomodoros += 1
             if self.completed_pomodoros % 4 == 0:
                 self.next_mode = TimerState.LONG_BREAK
             else:
                 self.next_mode = TimerState.SHORT_BREAK
         else:
-            self.next_mode = TimerState.POMODORO
+            self.next_mode = TimerState.WORK
 
         self.update_display()
 
@@ -122,8 +122,8 @@ class Pomo(App):
             self.timer_display.add_class("-alert")
             self.mode_display.mode = "[bold red]Time's up![/bold red]"
 
-    def action_start_pomodoro(self):
-        self.start_timer(TimerState.POMODORO)
+    def action_start_work(self):
+        self.start_timer(TimerState.WORK)
 
     def action_start_short_break(self):
         self.start_timer(TimerState.SHORT_BREAK)
