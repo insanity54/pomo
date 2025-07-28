@@ -21,6 +21,8 @@ A minimal pomodoro timer.
 
 ## Motivation
 
-The fewer input required, the better. Any time the user spends on input is wasted time that they could have been spent doing their task or living their life. There is no pause button, and that's a feature (not a bug.) Need to pause the timer in the middle of your task? Just step away from your PC. LET THE TIMER DO WHATEVER IT IS DOING. There is no stat tracking to fuck up by not working when it says you should be working. The timer is a helper, not a god. Just ignore the timer while you're away, then press one of the hotkeys to get started on a new session when you get back.
+The less input you have to give, the better. Every second spent controlling the app is time you could be spending on your work or just living your life. This Pomodoro timer doesn't have a pause button on purpose. If you need to take a break, just step away from your computer and let the timer keep running.
 
-So many pomodoro timers out there have configurable settings, menus, multiple button presses to get started, visual clutter, ads, stat tracking, webhooks, features you don't need, etc. Ick. This pomo is minimal and it's there to assist you, not to get in the way.
+There's no tracking of stats or pressure to follow the timer exactly. It's just a helpful tool, not a strict boss. When you're ready to get back, just hit one of the hotkeys to start a new session.
+
+Most Pomodoro apps come with tons of settings, menus, ads, and features you don't need. This timer keeps things simple and clean so it helps you stay focused without getting in the way.
