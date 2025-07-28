@@ -6,6 +6,10 @@ A minimal pomodoro timer.
 
 * [x] One button operation.
 * [x] Bold visual feedback when the pomo period is complete.
+* [x] Automatically starts the first Pomodoro when the app launches  
+* [x] Visual countdown timer
+* [x] Shows both the current and next session type
+* [x] Switch between Pomodoro, short break, and long break using hotkeys
 
 ## Hotkeys
 
