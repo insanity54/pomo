@@ -1,6 +1,6 @@
 # pomo
 
-A minimal pomodoro timer.
+A minimal pomodoro timer implemented as a [TUI](https://en.wikipedia.org/wiki/Text-based_user_interface)
 
 ![minimal pomo timer](https://github.com/insanity54/pomo/blob/main/screenshot.png?raw=true)
 
