@@ -2,6 +2,8 @@
 
 A minimal pomodoro timer.
 
+![minimal pomo timer](https://github.com/insanity54/pomo/blob/main/screenshot.png?raw=true)
+
 ## Features
 
 * [x] One button operation.
